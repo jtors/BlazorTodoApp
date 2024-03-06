@@ -26,17 +26,31 @@ else
     }
 </ul>
 
-<h3>Basket</h3>
-<ul>
-    @foreach (var item in currentBasket)
-    {
-        <li>@item</li>
-    }
-</ul>
-
 <button class="btn btn-primary" @onclick="IncrementCount">Increment Count</button>
 <button class="btn btn-primary" @onclick="ChangeValueOfProps">Change Value of Props</button>
-<button class="btn btn-primary" @onclick="AddItemOnGrocery">Add Item to Basket</button>
+
+<h3>Basket</h3>
+@if (Basket.Count > 0)
+{
+    <ul class="grid-4">
+    @foreach (var item in Basket.Select((value, index) => new { index, value }))
+        {
+            <li>@item.value <button class="btn btn-primary" @onclick="() => RemoveItemOnBasket(item.index)">Delete</button></li>
+        }
+    </ul>
+}
+else
+{
+    <p>No Items on Basket</p>
+}
+
+<div class="flex-elem mt-1">
+    <div class="flex-elem -col">
+        <span>@basketItem</span>
+        <input @onchange="InputChange" />
+    </div>
+    <button class="btn btn-primary" @onclick="AddItemOnBasket">Add Item to Basket</button>
+</div>
 
 @code {
     [Parameter]
@@ -46,10 +60,10 @@ else
     public string[] Names { get; set; } = { };
 
     [Parameter]
-    public List<string> Ingredients { get; set; } = new List<string> { "Grapes", "Sugar", "Salt", "Soy Sauce" };
+    public List<string> Basket { get; set; }
 
     private int currentCount = 0;
-    private List<string> currentBasket = new List<string>();
+    private string basketItem = "";
 
     private void IncrementCount()
     {
@@ -63,8 +77,19 @@ else
         Names[2] = "SwassnivoK";
     }
 
-    private void AddItemOnGrocery()
+    private void InputChange(ChangeEventArgs e)
     {
+        basketItem = (string)e.Value;
+    }
+
+    private void AddItemOnBasket()
+    {
+        Basket.Add(basketItem);
+    }
+
+    private void RemoveItemOnBasket(int index)
+    {
+        Basket.RemoveAt(index);
     }
 
 }
