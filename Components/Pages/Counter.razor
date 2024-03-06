@@ -7,13 +7,64 @@
 
 <p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<p role="status">Current count: @(currentCount)</p>
+
+@if (currentCount > 3)
+{
+    <p>You Win @currentCount</p>
+}
+else
+{
+    <p>Waiting for it @currentCount</p>
+}
+
+<h3>Names</h3>
+<ul>
+    @foreach (var name in Names)
+    {
+        <li>@name</li>
+    }
+</ul>
+
+<h3>Basket</h3>
+<ul>
+    @foreach (var item in currentBasket)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Increment Count</button>
+<button class="btn btn-primary" @onclick="ChangeValueOfProps">Change Value of Props</button>
+<button class="btn btn-primary" @onclick="AddItemOnGrocery">Add Item to Basket</button>
 
 @code {
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    [Parameter]
+    public string[] Names { get; set; } = { };
+
+    [Parameter]
+    public List<string> Ingredients { get; set; } = new List<string> { "Grapes", "Sugar", "Salt", "Soy Sauce" };
+
     private int currentCount = 0;
+    private List<string> currentBasket = new List<string>();
 
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount += IncrementAmount;
     }
+
+    private void ChangeValueOfProps()
+    {
+        Names[0] = "Ander";
+        Names[1] = "Voila";
+        Names[2] = "SwassnivoK";
+    }
+
+    private void AddItemOnGrocery()
+    {
+    }
+
 }
