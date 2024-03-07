@@ -6,13 +6,4 @@
 
 Welcome to your new app.
 
-<Counter
-    IncrementAmount="1"
-    Names="@(new string[]{"Tesla", "Coil", "Anderson"})"
-    Basket="@currentBasket"
-/>
-
-@code {
-    private List<string> currentBasket = new List<string> { "Grapes", "Sugar", "Salt", "Soy Sauce" };
-
-}
+<Counter IncrementAmount="1" Names="@(new string[]{"Tesla", "Coil", "Anderson"})" />
