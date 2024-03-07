@@ -6,6 +6,10 @@ This is a Simple CRUD app to learn the basics of Blazor
 
 ## How to run
 ```bash
+$ npm run install
+
+$ npm run dev
+
 $ dotnet watch
 ```
 Open (localhost)[http://localhost:5255/] in the browser
