@@ -10,6 +10,7 @@ $ npm run install
 
 $ npm run dev
 
+# for another tab or pane
 $ dotnet watch
 ```
 Open (localhost)[http://localhost:5255/] in the browser
